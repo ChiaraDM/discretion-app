@@ -3,12 +3,13 @@ const Token = require("../models/token");
 async function authenticator(req, res, next) {
     
     try {
+        console.log("HEADERS:", req.headers)
         const userToken = req.headers["authorization"];
 
         if (!userToken) {
             throw new Error("User not authenticated.");
         } else {
-            const validToken = await Token.getOneByToken(userToken);
+            await Token.getOneByToken(userToken);
 
             next();
         }
